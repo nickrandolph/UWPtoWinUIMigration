@@ -31,9 +31,9 @@ namespace UWPtoWinUIMigration.WinUI
         
         }
 
-private void FrameLoaded(object sender, RoutedEventArgs e)
-{
-    (sender as Frame).Navigate(typeof(UI.MainPage));
-}
+        private void FrameLoaded(object sender, RoutedEventArgs e)
+        {
+            (sender as Frame).Navigate(typeof(MainPage));
+        }
     }
 }
