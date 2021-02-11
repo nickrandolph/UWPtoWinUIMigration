@@ -1,0 +1,24 @@
+﻿<Application
+    x:Class="UWPtoWinUIMigration.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:UWPtoWinUIMigration" xmlns:ui="using:UWPtoWinUIMigration.UI">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls" />
+                <ui:StyleResources />
+                <!-- Other merged dictionaries here -->
+            </ResourceDictionary.MergedDictionaries>
+            <!-- Other app resources here -->
+        </ResourceDictionary>
+    </Application.Resources>
+    <!--<Application.Resources>
+        <Style TargetType="Button">
+            <Style.Setters>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="HorizontalAlignment" Value="Center" />
+            </Style.Setters>
+        </Style>
+    </Application.Resources>-->
+</Application>

@@ -1,0 +1,72 @@
+﻿<Project Sdk="MSBuild.Sdk.Extras">
+  <PropertyGroup>
+    <TargetFrameworks>uap10.0.16299;net5.0-windows10.0.18362.0</TargetFrameworks>
+    <TargetPlatformMinVersion>10.0.17134.0</TargetPlatformMinVersion>
+    <RootNamespace>WinUIMultiTarget.UI</RootNamespace>
+    <RuntimeIdentifiers>win10-x86;win10-x64;win10-arm64</RuntimeIdentifiers>
+    <IsWinUI>false</IsWinUI>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="$(TargetFramework.Contains('net5.0'))">
+    <IsWinUI>true</IsWinUI>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="$(IsWinUI)">
+    <DefineConstants>WinUI</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="$(IsWinUI)==false">
+    <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
+    <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.19041.0</TargetPlatformVersion>
+  </PropertyGroup>
+
+  <ItemGroup Condition="$(IsWinUI)">
+    <PackageReference Include="Microsoft.WinUI" Version="3.0.0-preview3.201113.0" />
+  </ItemGroup>
+
+  <ItemGroup Condition="$(IsWinUI)==false">
+    <PackageReference Include="Microsoft.UI.Xaml" Version="2.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="MainPage.xaml" />
+    <None Remove="SecondPage.xaml" />
+    <None Remove="StyleResources.xaml" />
+  </ItemGroup>
+
+  <ItemGroup Condition="$(IsWinUI)">
+    <Page Update="MainPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Update="SecondPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Update="StyleResources.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+  <ItemGroup Condition="$(IsWinUI)==false">
+    <Page Include="MainPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Compile Update="MainPage.xaml.cs">
+      <DependentUpon>MainPage.xaml</DependentUpon>
+    </Compile>
+    <Page Include="SecondPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Compile Update="SecondPage.xaml.cs">
+      <DependentUpon>SecondPage.xaml</DependentUpon>
+    </Compile>
+    <Page Include="StyleResources.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Compile Update="StyleResources.xaml.cs">
+      <DependentUpon>StyleResources.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+</Project>
